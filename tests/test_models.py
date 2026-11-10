@@ -6,6 +6,7 @@ import numpy as np
 from inflammation.models import daily_max
 from inflammation.models import daily_min
 from inflammation.models import daily_mean
+import pytest
 
 def test_daily_mean_zeros():
     """Test that mean function works for an array of zeros."""
@@ -54,3 +55,9 @@ def test_daily_min():
     actual = daily_min(data)
 
     np.testing.assert_array_equal(actual, expected)
+
+def test_daily_min_string():
+    """Test for TypeError when passing strings."""
+
+    with pytest.raises(TypeError):
+        error_expected = daily_min([['Hello', 'there'], ['General', 'Kenobi']])
